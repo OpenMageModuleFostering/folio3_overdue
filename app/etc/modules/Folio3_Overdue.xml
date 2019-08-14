@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Folio3_Overdue>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Folio3_Overdue>
+    </modules>
+</config>

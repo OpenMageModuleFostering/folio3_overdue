@@ -1,0 +1,52 @@
+<div class="page-title">
+    <h1><?php echo $this->__('Overdue Payments'); ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php //echo $this->getPagerHtml(); ?>
+<?php $_invoices = $this->getInvoices(); ?>
+<?php if($_invoices->getSize()): ?>
+    <table class="data-table" id="overdue-payments">
+        <col width="1" />
+        <col width="1" />
+        <col />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <thead>
+        <tr>
+            <th><?php echo $this->__('Invoice #') ?></th>
+            <th><?php echo $this->__('Date') ?></th>
+            <th><?php echo $this->__('Ship To') ?></th>
+            <th><span class="nobr"><?php echo $this->__('Paid') ?></span></th>
+            <th><span class="nobr"><?php echo $this->__('Due') ?></span></th>
+            <th><span class="nobr"><?php echo $this->__('Total') ?></span></th>
+            <!--<th><span class="nobr"><?php /*echo $this->__('Order Status') */?></span></th>-->
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($_invoices as $_invoice): ?>
+            <tr>
+                <td><?php echo $_invoice->getIncrementId() ?></td>
+                <td><span class="nobr"><?php echo $this->formatDate($_invoice->getCreatedAtStoreDate()) ?></span></td>
+                <td><?php echo $_invoice->getShippingAddress() ? $this->escapeHtml($_invoice->getShippingAddress()->getName()) : '&nbsp;' ?></td>
+                <td><?php echo Mage::helper('core')->currency($_invoice->getTotalPaid()) ?></td>
+                <td><?php echo Mage::helper('core')->currency($_invoice->getTotalDue()) ?></td>
+                <td><?php echo Mage::helper('core')->currency($_invoice->getGrandTotal()) ?></td>
+                <td class="a-center">
+                <span class="nobr"><a href="<?php echo $this->getViewUrl($_invoice) ?>"><?php echo $this->__('View Order') ?></a>
+                    <?php /*<span class="separator">|</span><a href="<?php echo $this->getTrackUrl($_invoice) ?>"><?php echo $this->__('Track Order') ?></a>&nbsp;*/ ?>
+                    <?php if ($this->helper('folio3_overdue')->canPayDues($_invoice)) : ?>
+                        <span class="separator">|</span> <a href="<?php echo $this->getPayUrl($_invoice) ?>" class="link-reorder"><?php echo $this->__('Pay') ?></a>
+                    <?php endif ?>
+                </span>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('overdue-payments');</script>
+<?php else: ?>
+    <p><?php echo $this->__('You have no overdue payments.'); ?></p>
+<?php endif ?>

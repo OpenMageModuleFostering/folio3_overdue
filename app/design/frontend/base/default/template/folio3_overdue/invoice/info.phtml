@@ -1,0 +1,38 @@
+<?php //echo $this->getPagerHtml(); ?>
+<?php $invoices = $this->getInvoices(); ?>
+<?php if($invoices->getSize()): ?>
+    <table class="data-table" id="overdue-payments">
+        <col width="1" />
+        <col width="1" />
+        <col />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <thead>
+            <tr>
+                <th><?php echo $this->__('Invoice #') ?></th>
+                <th><?php echo $this->__('Date') ?></th>
+                <th><?php echo $this->__('Ship To') ?></th>
+                <th><span class="nobr"><?php echo $this->__('Paid') ?></span></th>
+                <th><span class="nobr"><?php echo $this->__('Due') ?></span></th>
+                <th><span class="nobr"><?php echo $this->__('Total') ?></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $_odd = ''; ?>
+            <?php foreach ($invoices as $invoice): ?>
+                <tr>
+                    <td><?php echo $invoice->getIncrementId() ?></td>
+                    <td><span class="nobr"><?php echo $this->formatDate($invoice->getCreatedAtStoreDate()) ?></span></td>
+                    <td><?php echo $invoice->getShippingAddress() ? $this->escapeHtml($invoice->getShippingAddress()->getName()) : '&nbsp;' ?></td>
+                    <td><?php echo Mage::helper('core')->currency($invoice->getTotalPaid()) ?></td>
+                    <td><?php echo Mage::helper('core')->currency($invoice->getTotalDue()) ?></td>
+                    <td><?php echo Mage::helper('core')->currency($invoice->getGrandTotal()) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('overdue-payments');</script>
+<?php else: ?>
+    <p><?php echo $this->__('You have no overdue payments.'); ?></p>
+<?php endif ?>

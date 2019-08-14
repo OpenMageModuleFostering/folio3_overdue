@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <folio3 translate="label" module="folio3_overdue">
+            <label>Folio3 Extensions</label>
+            <sort_order>100</sort_order>
+        </folio3>
+    </tabs>
+    <sections>
+        <Overdue translate="label" module="folio3_overdue">
+            <label>Payments Overdue</label>
+            <tab>folio3</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>998</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <config translate="label">
+                    <label>Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <allowedMethods translate="label">
+                            <label>Allowed Payment Methods</label>
+                            <comment>Allowed Payment Methods</comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>folio3_overdue/system_config_source_payment_methods</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowedMethods>
+                    </fields>
+                </config>
+            </groups>
+        </Overdue>
+    </sections>
+</config>

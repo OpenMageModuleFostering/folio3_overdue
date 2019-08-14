@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>folio3_overdue</name>
+    <version>1.0.0</version>
+    <stability>stable</stability>
+    <license uri="https://opensource.org/licenses/OSL-3.0">Open Software License (OSL)</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Basic functionality to pay overdue payments/unpaid invoices that are created by the administrator and is visible on the customer dashboard for further payment.</summary>
+    <description>Basic functionality to pay overdue payments/unpaid invoices that are created by the administrator and is visible on the customer dashboard for further payment.</description>
+    <notes>Basic functionality to pay overdue payments/unpaid invoices that are created by the administrator and is visible on the customer dashboard for further payment.</notes>
+    <authors><author><name>Folio3</name><user>MAG003179920</user><email>ecommerce@folio3.com</email></author></authors>
+    <date>2016-10-04</date>
+    <time>08:57:25</time>
+    <contents><target name="magecommunity"><dir name="Folio3"><dir name="Overdue"><dir name="Block"><dir name="Customer"><dir name="Account"><file name="Navigation.php" hash="ae427a314d9cf84191aa7ae08f22af56"/></dir></dir><file name="Grid.php" hash="a9d8265e4736d4763058b842d6864455"/><file name="Invoice.php" hash="49b689067ff47b548a41322a82406e20"/><dir name="Payment"><file name="Methods.php" hash="4d945d521738e0695083e21769a8eb36"/></dir><file name="Payment.php" hash="65b6a5da6e93c53583c7c2970ad4ae20"/></dir><dir name="Helper"><file name="Data.php" hash="8f38250e918fa0b39cc0076870bf570a"/></dir><dir name="Model"><dir name="Paypal"><file name="Express.php" hash="8c4a83f87100a7af8546612d446309fc"/></dir><dir name="Sales"><dir name="Order"><file name="Payment.php" hash="5d0d0805b76b419e96d4046c1e69be69"/></dir></dir><dir name="System"><dir name="Config"><dir name="Source"><dir name="Payment"><file name="Methods.php" hash="8f70703d545cb783f09ff5b999874abd"/></dir></dir></dir></dir></dir><dir name="controllers"><file name="AccountController.php" hash="dfba0491317836f8250cbeb6bb9c6c70"/></dir><dir name="etc"><file name="config.xml" hash="a826b7d6d41b51fb814a781cb8820509"/><file name="system.xml" hash="f46c052e2cbe0ed2421b19b62d58d4b8"/></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="folio3_overdue.xml" hash="2943d4c7b0815da2032a27e4eaf7278f"/></dir><dir name="template"><dir name="folio3_overdue"><file name="grid.phtml" hash="ca72a5a29ae70340781abc0162d56dfe"/><dir name="invoice"><file name="info.phtml" hash="da14d85a35f30ccedb40c5c5a87f4df0"/><dir name="payment"><file name="methods.phtml" hash="8419dc2f62522eb4d12e109dad3276ed"/></dir><file name="payment.phtml" hash="832b4ba8e6f24f890622b8d385e10a61"/></dir><file name="invoice.phtml" hash="537ea53d5d0ae09f8a2bbcd856f1997c"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Folio3_Overdue.xml" hash="8aefc56264b5ebc7fd181c6f6be9fad8"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

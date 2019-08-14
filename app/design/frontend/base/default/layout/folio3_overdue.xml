@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label">
+                <name>overdue</name>
+                <path>customer/account/overdue</path>
+                <label>Overdue Payments</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <customer_account_overdue>
+        <label>Customer Overdue Payments</label>
+        <update handle="customer_account"/>
+
+        <reference name="my.account.wrapper">
+            <block type="folio3_overdue/grid" name="folio3.overdue.grid" template="folio3_overdue/grid.phtml" />
+        </reference>
+    </customer_account_overdue>
+
+    <customer_account_pay>
+        <label>Customer Overdue Payments</label>
+        <update handle="customer_account"/>
+
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/opcheckout.js</name></action>
+        </reference>
+
+        <reference name="my.account.wrapper">
+            <block type="folio3_overdue/invoice" name="folio3.overdue.invoice" template="folio3_overdue/invoice.phtml">
+                <block type="folio3_overdue/invoice" name="folio3.overdue.invoice.info" template="folio3_overdue/invoice/info.phtml" />
+
+                <!-- PAYMENTS METHOD FORM -->
+                <block type="folio3_overdue/payment" name="folio3.overdue.invoice.payment" template="folio3_overdue/invoice/payment.phtml">
+                    <block type="folio3_overdue/payment_methods" name="folio3.overdue.invoice.payment.methods" template="folio3_overdue/invoice/payment/methods.phtml">
+                        <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+                    </block>
+                </block>
+            </block>
+        </reference>
+    </customer_account_pay>
+
+    <customer_group_general>
+        <reference name="customer_account_navigation">
+            <action method="removeLinkByUrl"><url>customer/account/overdue/</url></action>
+        </reference>
+    </customer_group_general>
+</layout>

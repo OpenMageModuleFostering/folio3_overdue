@@ -1,0 +1,74 @@
+<script type="text/javascript">
+//<![CDATA[
+    var quoteBaseGrandTotal = <?php echo (float)$this->getQuoteBaseGrandTotal(); ?>;
+    var checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+    var payment = new Payment('co-payment-form', '<?php echo $this->getPayPostUrl('*/*/payPost', array('_secure' => $this->getRequest()->isSecure())) ?>');
+    var lastPrice;
+//]]>
+</script>
+
+<!--<div id="checkout-step-payment" class="f3_overdue">-->
+    <form action="<?php echo $this->getPayPostUrl(); ?>" method="POST" id="co-payment-form">
+        <fieldset>
+            <dl class="sp-methods f3_overdue">
+                <?php echo $this->getChildHtml('folio3.overdue.invoice.payment.methods') ?>
+            </dl>
+        </fieldset>
+        <fieldset class="no-display">
+            <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+            <input name="order_id" type="hidden" value="<?php echo Mage::helper('folio3_overdue')->getInvoice()->getOrder()->getId(); ?>" />
+            <input name="invoice_id" type="hidden" value="<?php echo Mage::helper('folio3_overdue')->getInvoice()->getId(); ?>" />
+        </fieldset>
+        <div class="buttons-set">
+            <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+            <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+            <button data-action="save-overdue-payment" type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Submit')) ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+        </div>
+    </form>
+
+    <div class="tool-tip" id="payment-tool-tip" style="display:none;">
+        <div class="btn-close"><a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>
+        <div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
+    </div>
+<!--</div>-->
+
+<script type="text/javascript">
+    //< ![CDATA[
+    var customForm = new VarienForm('co-payment-form', true);
+
+    jQuery('#co-payment-form').ready(function(){
+        jQuery('#co-payment-form').submit(function(){
+            if(!payment.validate()) return false;
+        });
+
+        jQuery('.cvv-what-is-this').each(function(index, element){
+            Event.observe(element, 'click', toggleToolTip);
+        });
+    });
+    //]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+    function toggleToolTip(event){
+        if($('payment-tool-tip')){
+            $('payment-tool-tip').setStyle({
+                top: (Event.pointerY(event)-560)+'px'//,
+                //left: (Event.pointerX(event)+100)+'px'
+            })
+            $('payment-tool-tip').toggle();
+        }
+        Event.stop(event);
+    }
+    if($('payment-tool-tip-close')){
+        Event.observe($('payment-tool-tip-close'), 'click', toggleToolTip);
+    }
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+    payment.currentMethod = "<?php echo $this->getSelectedMethodCode() ?>";
+//]]>
+});
+</script>
